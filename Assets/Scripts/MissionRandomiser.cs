@@ -5,13 +5,37 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 
+[System.Serializable]
+public class Mission
+{
+    public string Guid;
+    public string Name;
+    public string Description;
+    public string Verbose;
+
+    public Mission()
+    {
+        
+    }
+    public Mission(bool isUnique)
+    {
+        if(isUnique)Guid = System.Guid.NewGuid().ToString();
+    }
+}
+
+
+
+[System.Serializable]
+public class MissionArrayWrapper
+{
+    public Mission[] MissionsArray;
+}
+
 public class MissionRandomiser : MonoBehaviour
 {
-
-    public const string missionsFileName = "MissionList.txt";
+    public Mission[] MissionsArray;
+    public const string missionsFileName = "MissionList.json";
     public const string flavourFileName = "FlavourTextList.txt";
-
-
 
     private string persistentMissionsFilePath;
     private string persistentFlavourFilePath;
@@ -26,7 +50,7 @@ public class MissionRandomiser : MonoBehaviour
     private void Awake()
     {
         persistentMissionsFilePath = (Application.persistentDataPath + "/" + missionsFileName);
-        persistentFlavourFilePath = (Application.persistentDataPath + "/" + flavourFileName);        
+        persistentFlavourFilePath = (Application.persistentDataPath + "/" + flavourFileName);
     }
     private void LoadFlavourText()
     {
@@ -68,6 +92,34 @@ public class MissionRandomiser : MonoBehaviour
         {
             flavourText.text = "TRIED TO SPIN WHEN NO FILES ARE FOUND";
             resultText.text = "TRIED TO SPIN WHEN NO FILES ARE FOUND";
+        }
+    }
+
+
+
+    [ContextMenu("Try put to Json")]
+    public void TryPutToJson()
+    {
+        MissionArrayWrapper maw = new MissionArrayWrapper();
+        maw.MissionsArray = MissionsArray;
+        
+        string jsonString = JsonUtility.ToJson(maw,true);
+        string path = persistentMissionsFilePath;
+        File.WriteAllText(path, jsonString);
+    }
+
+    [ContextMenu("Try read Json")]
+    public void TryReadJson()
+    {
+
+        if (File.Exists(persistentMissionsFilePath))
+        {
+            string json = File.ReadAllText(persistentMissionsFilePath);
+            MissionArrayWrapper wrapper = JsonUtility.FromJson<MissionArrayWrapper>(json);
+            foreach(Mission m in wrapper.MissionsArray)
+            {
+                print(m.Name);
+            }
         }
     }
 }

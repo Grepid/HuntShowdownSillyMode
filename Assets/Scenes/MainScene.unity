@@ -170,6 +170,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcd2b165bc3e934ead0ddd96560353f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MissionsArray:
+  - Guid: 1
+    Name: First Name
+    Description: Chicken Sandwich
+    Verbose: Yes, but
+  - Guid: 2
+    Name: Rotjaw
+    Description: Jaw is Rotting
+    Verbose: All over the floor
+  - Guid: 3
+    Name: Safety Torch
+    Description: Put it in the hallways
+    Verbose: First ones on the house
   resultText: {fileID: 1338282052}
   flavourText: {fileID: 1598288150}
 --- !u!1 &256182556
