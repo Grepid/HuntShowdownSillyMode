@@ -170,16 +170,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcd2b165bc3e934ead0ddd96560353f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  readFileOnLoad: 1
   MissionsArray:
-  - Guid: 1
+  - GUID: 
+    Type: 0
     Name: First Name
     Description: Chicken Sandwich
     Verbose: Yes, but
-  - Guid: 2
+  - GUID: 
+    Type: 1
     Name: Rotjaw
     Description: Jaw is Rotting
     Verbose: All over the floor
-  - Guid: 3
+  - GUID: 
+    Type: 2
     Name: Safety Torch
     Description: Put it in the hallways
     Verbose: First ones on the house
@@ -1320,6 +1324,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1666657791}
   m_CullTransparentMesh: 1
+--- !u!1 &1695310879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1695310881}
+  - component: {fileID: 1695310880}
+  m_Layer: 0
+  m_Name: AppManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1695310880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695310879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa96461f01e687d40ade1cf90390b2c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1695310881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695310879}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1830154376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1464,6 +1512,7 @@ RectTransform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1695310881}
   - {fileID: 1359251253}
   - {fileID: 256182558}
   - {fileID: 1997178465}
