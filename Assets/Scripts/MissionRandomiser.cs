@@ -4,11 +4,18 @@ using Unity.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
+using System;
+using Unity.VisualScripting;
+
+[System.Serializable]
+public enum MissionType {Loadout,Gameplay,Kill}
+
 
 [System.Serializable]
 public class Mission
 {
-    public string Guid;
+    public string GUID;
+    public MissionType Type;
     public string Name;
     public string Description;
     public string Verbose;
@@ -17,30 +24,27 @@ public class Mission
     {
         
     }
-    public Mission(bool isUnique)
+    
+    /*public Mission(bool isUnique)
     {
-        if(isUnique)Guid = System.Guid.NewGuid().ToString();
-    }
+        if(isUnique) GUID = System.Guid.NewGuid().ToString();
+    }*/
 }
+
 
 
 
 [System.Serializable]
-public class MissionArrayWrapper
+public class MissionsWrapper
 {
-    public Mission[] MissionsArray;
+    public Mission[] Array;
 }
 
 public class MissionRandomiser : MonoBehaviour
 {
+    public bool readFileOnLoad;
     public Mission[] MissionsArray;
-    public const string missionsFileName = "MissionList.json";
-    public const string flavourFileName = "FlavourTextList.txt";
-
-    private string persistentMissionsFilePath;
-    private string persistentFlavourFilePath;
     public bool MissionsFound { get; private set; }
-    private string[] missions;
     private string[] flavour;
 
     [SerializeField]
@@ -49,31 +53,32 @@ public class MissionRandomiser : MonoBehaviour
 
     private void Awake()
     {
-        persistentMissionsFilePath = (Application.persistentDataPath + "/" + missionsFileName);
-        persistentFlavourFilePath = (Application.persistentDataPath + "/" + flavourFileName);
+        if (readFileOnLoad)
+        {
+            MissionsArray = RetrieveAllMissions();
+        }
     }
     private void LoadFlavourText()
     {
-        if (!File.Exists(persistentFlavourFilePath))
+        if (!File.Exists(AppManager.FlavourTxtPath))
         {
-            Debug.LogError("File not found in Persistent data path: " + persistentFlavourFilePath);
             return;
         }
 
-        string text = File.ReadAllText(persistentFlavourFilePath);
+        string text = File.ReadAllText(AppManager.FlavourTxtPath);
         flavour = text.Split(new[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
     }
     private void LoadMissions()
     {
-        if (!File.Exists(persistentMissionsFilePath))
+        if (!File.Exists(AppManager.MissionsJsonPath))
         {
-            Debug.LogError("File not found in Persistent data path: " + persistentMissionsFilePath);
             MissionsFound = false;
             return;
         }
 
-        string text = File.ReadAllText(persistentMissionsFilePath);
-        missions = text.Split(new[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
+        string text = File.ReadAllText(AppManager.MissionsJsonPath);
+        //missions = text.Split(new[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
+        MissionsArray = RetrieveAllMissions();
         MissionsFound = true;
     }
     public void DisplayMissions()
@@ -82,10 +87,15 @@ public class MissionRandomiser : MonoBehaviour
         LoadFlavourText();
         if (MissionsFound)
         {
-            string flavourMessage = flavour[Random.Range(0, flavour.Length)] ?? "Install the flavour texts you tasteless bastard" ;
+            string flavourMessage;
+            if (flavour == null)flavourMessage = "Install the flavour texts you tasteless bastard";
+            else
+            {
+                flavourMessage = flavour[UnityEngine.Random.Range(0, flavour.Length)];
+            }
             flavourText.text = flavourMessage;
 
-            string resultMessage = missions[Random.Range(0, missions.Length)] ?? "This literally should not be possible to see lol";
+            string resultMessage = MissionsArray[UnityEngine.Random.Range(0, MissionsArray.Length)].Description ?? "This literally should not be possible to see lol";
             resultText.text = resultMessage;
         }
         else
@@ -95,31 +105,80 @@ public class MissionRandomiser : MonoBehaviour
         }
     }
 
-
-
-    [ContextMenu("Try put to Json")]
-    public void TryPutToJson()
+    [ContextMenu("WriteOutTypes")]
+    public void WriteOutTypes()
     {
-        MissionArrayWrapper maw = new MissionArrayWrapper();
-        maw.MissionsArray = MissionsArray;
-        
-        string jsonString = JsonUtility.ToJson(maw,true);
-        string path = persistentMissionsFilePath;
-        File.WriteAllText(path, jsonString);
+        foreach(Mission m in RetrieveMissionsOfType(MissionType.Loadout))
+        {
+            print(m.GUID);
+        }
+
+        foreach (Mission m in RetrieveMissionsOfType(MissionType.Gameplay))
+        {
+            print(m.GUID);
+        }
+
+        foreach (Mission m in RetrieveMissionsOfType(MissionType.Kill))
+        {
+            print(m.GUID);
+        }
     }
 
-    [ContextMenu("Try read Json")]
-    public void TryReadJson()
+    [ContextMenu("Write to Json")]
+    public void ToJson()
     {
+        WriteToJson(MissionsArray);
+    }
 
-        if (File.Exists(persistentMissionsFilePath))
+    public void WriteToJson(Mission[] missions)
+    {
+        MissionsWrapper maw = new MissionsWrapper();
+        foreach(Mission m in missions)
         {
-            string json = File.ReadAllText(persistentMissionsFilePath);
-            MissionArrayWrapper wrapper = JsonUtility.FromJson<MissionArrayWrapper>(json);
-            foreach(Mission m in wrapper.MissionsArray)
+            if(m.GUID == null || m.GUID == "")
             {
-                print(m.Name);
+                m.GUID = Guid.NewGuid().ToString();
             }
         }
+        maw.Array = missions;
+        
+        string jsonString = JsonUtility.ToJson(maw,true);
+
+        File.WriteAllText(AppManager.MissionsJsonPath, jsonString);
+    }
+
+
+    public Mission[] RetrieveMissionsOfType(MissionType type)
+    {
+        if (File.Exists(AppManager.MissionsJsonPath))
+        {
+            string json = File.ReadAllText(AppManager.MissionsJsonPath);
+            MissionsWrapper wrapper = JsonUtility.FromJson<MissionsWrapper>(json);
+            var res = Array.FindAll(wrapper.Array, m => m.Type == type);
+            return res;
+        }
+        else
+        {
+            Debug.LogError($"The file at {AppManager.MissionsJsonPath} does not exist");
+        }
+        return new Mission[]{};
+    }
+    public Mission[] RetrieveMissionsOfTypes(MissionType[] types)
+    {
+        List<Mission> result = new List<Mission>();
+        foreach(MissionType t in types)
+        {
+            result.AddRange(RetrieveMissionsOfType(t));
+        }
+        return result.ToArray();
+    }
+    public Mission[] RetrieveAllMissions()
+    {
+        List<Mission> result = new List<Mission>();
+        foreach (MissionType t in Enum.GetValues(typeof(MissionType)))
+        {
+            result.AddRange(RetrieveMissionsOfType(t));
+        }
+        return result.ToArray();
     }
 }
