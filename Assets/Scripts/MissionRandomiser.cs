@@ -153,7 +153,7 @@ public class MissionRandomiser : MonoBehaviour
         maw.Array = missions;
         
         string jsonString = JsonUtility.ToJson(maw,true);
-
+        AppManager.SanityCheck();
         File.WriteAllText(AppManager.MissionsJsonPath, jsonString);
     }
 

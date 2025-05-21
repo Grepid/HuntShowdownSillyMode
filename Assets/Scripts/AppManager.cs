@@ -12,5 +12,15 @@ public class AppManager : MonoBehaviour
     {
         MissionsJsonPath = Path.Combine(Application.persistentDataPath, MissionsFileName);
         FlavourTxtPath = Path.Combine(Application.persistentDataPath, FlavourFileName);
+
+        SanityCheck();
+    }
+    public static void SanityCheck()
+    {
+        if (!File.Exists(MissionsJsonPath))
+        {
+            //create a way to hold and load Defaults
+            File.Create(MissionsJsonPath);
+        }
     }
 }
