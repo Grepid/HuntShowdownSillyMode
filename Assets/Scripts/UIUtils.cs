@@ -8,6 +8,6 @@ public class UIUtils : MonoBehaviour
     }
     public void OpenLocalLow()
     {
-        Application.OpenURL(Application.persistentDataPath);
+        Application.OpenURL(AppManager.SaveDirectory);
     }
 }

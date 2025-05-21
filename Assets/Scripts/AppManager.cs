@@ -7,7 +7,9 @@ public class AppManager : MonoBehaviour
 
     public static string MissionsJsonPath;
     public static string FlavourTxtPath;
+    public static string SaveDirectory;
 
+    public const string SaveFolder = "SavedData";
     public const string MissionsFileName = "MissionsList.json";
     public const string FlavourFileName = "FlavourTextList.txt";
 
@@ -16,16 +18,21 @@ public class AppManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        MissionsJsonPath = Path.Combine(Application.persistentDataPath, MissionsFileName);
-        FlavourTxtPath = Path.Combine(Application.persistentDataPath, FlavourFileName);
+        SaveDirectory = Path.Combine(Application.persistentDataPath, SaveFolder);
+        MissionsJsonPath = Path.Combine(SaveDirectory, MissionsFileName);
+        FlavourTxtPath = Path.Combine(SaveDirectory, FlavourFileName);
 
         SanityCheck();
     }
     public static void SanityCheck()
     {
+        if (!Directory.Exists(SaveDirectory))
+        {
+            Directory.CreateDirectory(SaveDirectory);
+        }
+
         if (!File.Exists(MissionsJsonPath))
         {
-            //create a way to hold and load Defaults
             MissionRandomiser.WriteToJson(Instance.DefaultMissions.Missions);
         }
     }
