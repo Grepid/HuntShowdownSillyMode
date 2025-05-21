@@ -49,7 +49,7 @@ public class MissionRandomiser : MonoBehaviour
     private string[] flavour;
 
     [SerializeField]
-    TextMeshProUGUI resultText,flavourText;
+    TextMeshProUGUI resultText,flavourText,verboseText,nameText;
 
 
     private void Awake()
@@ -82,6 +82,7 @@ public class MissionRandomiser : MonoBehaviour
         MissionsArray = RetrieveAllMissions();
         MissionsFound = true;
     }
+    Mission currentMission;
     public void DisplayMissions()
     {
         LoadMissions();
@@ -96,8 +97,11 @@ public class MissionRandomiser : MonoBehaviour
             }
             flavourText.text = flavourMessage;
 
-            string resultMessage = MissionsArray[UnityEngine.Random.Range(0, MissionsArray.Length)].Description ?? "This literally should not be possible to see lol";
+            currentMission = MissionsArray[UnityEngine.Random.Range(0, MissionsArray.Length)];
+            string resultMessage = currentMission.Description;
             resultText.text = resultMessage;
+            nameText.text = currentMission.Name;
+            verboseText.text = currentMission.Verbose;
         }
         else
         {
