@@ -6,6 +6,7 @@ using System.IO;
 using TMPro;
 using System;
 using Unity.VisualScripting;
+using System.Linq;
 
 [System.Serializable]
 public enum MissionType {Loadout,Gameplay,Kill}
@@ -25,10 +26,10 @@ public class Mission
         
     }
     
-    /*public Mission(bool isUnique)
+    public Mission(bool isUnique)
     {
         if(isUnique) GUID = System.Guid.NewGuid().ToString();
-    }*/
+    }
 }
 
 
@@ -129,8 +130,13 @@ public class MissionRandomiser : MonoBehaviour
     {
         WriteToJson(MissionsArray);
     }
+    [ContextMenu("Apply Json")]
+    public void ApplyJson()
+    {
+        LoadMissions();
+    }
 
-    public void WriteToJson(Mission[] missions)
+    public static void WriteToJson(Mission[] missions)
     {
         MissionsWrapper maw = new MissionsWrapper();
         foreach(Mission m in missions)
@@ -147,8 +153,17 @@ public class MissionRandomiser : MonoBehaviour
         File.WriteAllText(AppManager.MissionsJsonPath, jsonString);
     }
 
+    public static void AddToJson(Mission m)
+    {
+        var missionArray = RetrieveAllMissions();
+        var missions = missionArray.ToList();
+        missions.Add(m);
 
-    public Mission[] RetrieveMissionsOfType(MissionType type)
+        WriteToJson(missions.ToArray());
+    }
+
+
+    public static Mission[] RetrieveMissionsOfType(MissionType type)
     {
         if (File.Exists(AppManager.MissionsJsonPath))
         {
@@ -163,7 +178,7 @@ public class MissionRandomiser : MonoBehaviour
         }
         return new Mission[]{};
     }
-    public Mission[] RetrieveMissionsOfTypes(MissionType[] types)
+    public static Mission[] RetrieveMissionsOfTypes(MissionType[] types)
     {
         List<Mission> result = new List<Mission>();
         foreach(MissionType t in types)
@@ -172,7 +187,7 @@ public class MissionRandomiser : MonoBehaviour
         }
         return result.ToArray();
     }
-    public Mission[] RetrieveAllMissions()
+    public static Mission[] RetrieveAllMissions()
     {
         List<Mission> result = new List<Mission>();
         foreach (MissionType t in Enum.GetValues(typeof(MissionType)))
