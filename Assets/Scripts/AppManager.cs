@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 
 public class AppManager : MonoBehaviour
@@ -9,7 +10,7 @@ public class AppManager : MonoBehaviour
     public const string FlavourFileName = "FlavourTextList.txt";
     private void Awake()
     {
-        MissionsJsonPath = (Application.persistentDataPath + "/" + MissionsFileName);
-        FlavourTxtPath = (Application.persistentDataPath + "/" + FlavourFileName);
+        MissionsJsonPath = Path.Combine(Application.persistentDataPath, MissionsFileName);
+        FlavourTxtPath = Path.Combine(Application.persistentDataPath, FlavourFileName);
     }
 }
