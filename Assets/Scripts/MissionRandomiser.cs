@@ -96,16 +96,21 @@ public class MissionRandomiser : MonoBehaviour
             flavourText.text = flavourMessage;
 
             currentMission = MissionsArray[UnityEngine.Random.Range(0, MissionsArray.Length)];
-            string resultMessage = currentMission.Description;
+            /*string resultMessage = currentMission.Description;
             resultText.text = resultMessage;
             nameText.text = currentMission.Name;
-            verboseText.text = currentMission.Verbose;
+            verboseText.text = currentMission.Verbose;*/
         }
         else
         {
-            flavourText.text = "TRIED TO SPIN WHEN NO FILES ARE FOUND";
-            resultText.text = "TRIED TO SPIN WHEN NO FILES ARE FOUND";
+            /*flavourText.text = "TRIED TO SPIN WHEN NO FILES ARE FOUND";
+            resultText.text = "TRIED TO SPIN WHEN NO FILES ARE FOUND";*/
+            currentMission = AppManager.Instance.DefaultMissions.Missions[UnityEngine.Random.Range(0, AppManager.Instance.DefaultMissions.Missions.Length)];
         }
+        string resultMessage = currentMission.Description;
+        resultText.text = resultMessage;
+        nameText.text = currentMission.Name;
+        verboseText.text = currentMission.Verbose;
     }
 
     [ContextMenu("WriteOutTypes")]
@@ -151,7 +156,6 @@ public class MissionRandomiser : MonoBehaviour
         maw.Array = missions;
         
         string jsonString = JsonUtility.ToJson(maw,true);
-        AppManager.SanityCheck();
         File.WriteAllText(AppManager.MissionsJsonPath, jsonString);
     }
 
@@ -167,16 +171,19 @@ public class MissionRandomiser : MonoBehaviour
 
     public static Mission[] RetrieveMissionsOfType(MissionType type)
     {
+        AppManager.SanityCheck();
         if (File.Exists(AppManager.MissionsJsonPath))
         {
             string json = File.ReadAllText(AppManager.MissionsJsonPath);
+
             MissionsWrapper wrapper = JsonUtility.FromJson<MissionsWrapper>(json);
+            
             var res = Array.FindAll(wrapper.Array, m => m.Type == type);
             return res;
         }
         else
         {
-            Debug.LogError($"The file at {AppManager.MissionsJsonPath} does not exist");
+            Debug.LogError($"The file at {AppManager.MissionsJsonPath} did not exist. Creating default copy");
         }
         return new Mission[]{};
     }
@@ -194,8 +201,19 @@ public class MissionRandomiser : MonoBehaviour
         List<Mission> result = new List<Mission>();
         foreach (MissionType t in Enum.GetValues(typeof(MissionType)))
         {
-            result.AddRange(RetrieveMissionsOfType(t));
+            var ms = RetrieveMissionsOfType(t);
+            result.AddRange(ms);
         }
         return result.ToArray();
+    }
+    [ContextMenu("Save Current To Defaults")]
+    public void SaveCurrentToDefaults()
+    {
+        AppManager.Instance.DefaultMissions.WriteMissions(MissionsArray);
+    }
+    [ContextMenu("Load Defaults")]
+    public void LoadDefaults()
+    {
+        MissionsArray = (Mission[])AppManager.Instance.DefaultMissions.Missions.Clone();
     }
 }
