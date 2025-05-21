@@ -77,8 +77,6 @@ public class MissionRandomiser : MonoBehaviour
             return;
         }
 
-        string text = File.ReadAllText(AppManager.MissionsJsonPath);
-        //missions = text.Split(new[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
         MissionsArray = RetrieveAllMissions();
         MissionsFound = true;
     }
@@ -134,7 +132,7 @@ public class MissionRandomiser : MonoBehaviour
     {
         WriteToJson(MissionsArray);
     }
-    [ContextMenu("Apply Json")]
+    [ContextMenu("Apply Json to Inspector Array")]
     public void ApplyJson()
     {
         LoadMissions();

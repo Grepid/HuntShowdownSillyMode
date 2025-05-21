@@ -7,6 +7,7 @@ public class MissionWriter : MonoBehaviour
 {
     public TMP_InputField NameField, DescriptionField, VerboseField;
     public TMP_Dropdown TypeField;
+    public UnityEngine.UI.Toggle RichTextPreview;
 
     public void SubmitPressed()
     {
@@ -28,5 +29,12 @@ public class MissionWriter : MonoBehaviour
         DescriptionField.text = string.Empty;
         VerboseField.text = string.Empty;
         TypeField.value = 0;
+    }
+    public void PreviewRichtext()
+    {
+        bool value = RichTextPreview.isOn;
+        NameField.richText = value;
+        DescriptionField.richText = value;
+        VerboseField.richText= value;
     }
 }
