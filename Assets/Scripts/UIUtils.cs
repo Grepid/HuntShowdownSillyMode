@@ -6,4 +6,8 @@ public class UIUtils : MonoBehaviour
     {
         Application.Quit();
     }
+    public void OpenLocalLow()
+    {
+        Application.OpenURL(Application.persistentDataPath);
+    }
 }
