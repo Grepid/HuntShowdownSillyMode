@@ -1117,7 +1117,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &221164477
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3563,9 +3563,9 @@ RectTransform:
   - {fileID: 579463556}
   m_Father: {fileID: 1138264173}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 302.3, y: -79.91}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 575.3, y: 110.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &657660521
@@ -5721,9 +5721,9 @@ RectTransform:
   - {fileID: 1404448057}
   m_Father: {fileID: 1138264173}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 302.3, y: -509.12}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 465.1, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1086980913
@@ -5765,7 +5765,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1086980914}
   m_OnClick:
     m_PersistentCalls:
@@ -10375,6 +10375,7 @@ GameObject:
   - component: {fileID: 1708952911}
   - component: {fileID: 1708952910}
   - component: {fileID: 1708952909}
+  - component: {fileID: 1708952912}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -10446,9 +10447,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1708952912}
         m_TargetAssemblyTypeName: UIUtils, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: CloseApp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10496,6 +10497,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708952907}
   m_CullTransparentMesh: 1
+--- !u!114 &1708952912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708952907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4dc0683ecef4c943a6691cf6baa1a0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1711119642
 GameObject:
   m_ObjectHideFlags: 0
@@ -10877,9 +10890,9 @@ RectTransform:
   - {fileID: 1450303665}
   m_Father: {fileID: 1138264173}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 302.3, y: -229.68001}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 465.1, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1787941595
@@ -11123,7 +11136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1830154377
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11620,9 +11633,9 @@ RectTransform:
   - {fileID: 1283389026}
   m_Father: {fileID: 1138264173}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 302.3, y: -648.83997}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 465.1, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1878894703
@@ -11664,7 +11677,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1878894704}
   m_OnClick:
     m_PersistentCalls:
@@ -12481,9 +12494,9 @@ RectTransform:
   - {fileID: 2075928746}
   m_Father: {fileID: 1138264173}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 302.3, y: -369.40002}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 465.1, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2030066037
@@ -12525,7 +12538,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2030066038}
   m_OnClick:
     m_PersistentCalls:
