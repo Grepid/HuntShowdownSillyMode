@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SoundSourceIdentifier: SoundSource
-  Sounds: []
+  Sounds:
+  - {fileID: 11400000, guid: 44ba8cb0ec01d704f87a5dc49ed53121, type: 2}
   sourcePoolCount: 15
   PauseMusic: {fileID: 0}
