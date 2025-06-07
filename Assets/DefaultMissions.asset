@@ -12,4 +12,125 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0bb9e802ff8d4f49a3a690f244e0c21, type: 3}
   m_Name: DefaultMissions
   m_EditorClassIdentifier: 
-  Missions: []
+  Missions:
+  - GUID: fcc30989-c11c-4bbc-82b3-156dcfc6a996
+    Type: 0
+    Name: Primitive
+    Description: No Guns.\nCrossbows, Explosives, Meele etc are still allowed.
+    Verbose: You may only run a weapon that does not fire "Bullets". This means your
+      only weapons are Bows and Crossbows, Melee weapons, and tools + equipment (excluding
+      quadringer and derringer))
+  - GUID: c56ac0d8-6579-421b-bb91-e20c76f059b9
+    Type: 0
+    Name: Zero to Hero
+    Description: You must start the hunt with <b>Both</b> weapon slots empty
+    Verbose: You can pick up weapons in the hunt, and you can start with tools and
+      consumables such as the derringer or quaderringer.
+  - GUID: a8f1c6e6-759a-4f91-9bd4-30c577b5590f
+    Type: 0
+    Name: one shot wonder
+    Description: "You can only use weapons that hold no more than 1 round in the
+      chamber. \nand you may not use fast fingers "
+    Verbose: 'You can only use single shot weapons of <b>any</b> type. This includes
+      but is not limited to:
+
+      Sparks, Romero 77, crossbow'
+  - GUID: 3035c815-25e0-4ab0-b36e-f1494375c70a
+    Type: 0
+    Name: vital emergency
+    Description: You cannot bring in medical equipment. You must scavange for them.
+    Verbose: You cannot bring in any medical related items, however you may find
+      and keep as much as you wish within the hunt
+  - GUID: 680e3f38-9725-42b0-ad36-a80c044e9441
+    Type: 0
+    Name: lance armstrong
+    Description: You must bring in and use the bomb lance as your only weapon slot
+    Verbose: You may not pick up or use any other weapon slot. you are also not allowed
+      to bring in a quaderingger or derringer
+  - GUID: 26ed2f1e-58a9-4c63-8c7f-ec3de9ed8e11
+    Type: 0
+    Name: Copycat
+    Description: Every time you kill an enemy hunter, you <b>MUST</b> swap your loadout
+      with theirs before killing anyone else.
+    Verbose: "In the case that they have quartermaster or Gunrunner whilst you do
+      not: \nyou must take at least 1 of their weapons, and cannot use any weapon
+      you cannot swap out."
+  - GUID: f831f057-60b3-460f-8983-8d995d226563
+    Type: 1
+    Name: The Burden of the Bayou
+    Description: You must play the start of the hunt with 1 less bar. This must be
+      from being downed by a team mate or yourself.
+    Verbose: You have to be downed from the beginning of the hunt, however you may
+      use restoration effects (excluding restoration stim) to gain back your bar.)
+  - GUID: 6a4d266f-0884-44e2-b8d5-89e554d03f04
+    Type: 1
+    Name: Pacifist Mode
+    Description: You must <b>NOT</b> <color=#ff0000>kill anybody</color>. You may
+      damage, but if you kill anybody you <b>must</b> <color=#ff0000>kill yourself</color>
+      and are not allowed to be revived
+    Verbose: You can do acts such as place concertina bombs, poison clouds, and choke
+      bombs. However if they kill somebody, you must adhere to the rules.
+  - GUID: d52c34f7-6a5c-4078-9407-7ffd43bf119e
+    Type: 1
+    Name: clutch or kick
+    Description: You can only damage / kill other hunters when at least 1 of your
+      team mates is downed.
+    Verbose: You may still contribute in any other way
+  - GUID: a97a1e49-87c0-412c-be04-de4426f7bfa1
+    Type: 1
+    Name: Man's best friend
+    Description: In the first location you spawn at, you must find a ground melee
+      item and carry it with you the entire game, going no more than 15 metres away
+      at any point.
+    Verbose: You may drop it to fight, however you cannot go more than 15 metres
+      away from it. To run away, you must pick it up at all costs and run with it.
+      Your team are allowed to call on you to prove your proximity at any point.
+  - GUID: ae0f8f73-50c3-4f54-9998-a99a69980c83
+    Type: 1
+    Name: Commander
+    Description: You must choose a team mate to be your commander, and you must obey
+      their every command. You can be autonomous to a small degree but if they command
+      you, you must obey.
+    Verbose: If they deem you to be insubordinate, they may down you as punishment
+  - GUID: e43d7683-2528-4ab4-9a5c-7dce00a5a057
+    Type: 1
+    Name: Anti Pacifist Mode
+    Description: You may <b>ONLY</b> Kill Players. You are not allowed to kill enemy
+      AI (other than boss targets). If you are the last alive, you may indirectly
+      kill AI
+    Verbose: 'If you are the last alive, you may do things such as:
+
+      Destroy
+      lit lanterns to cause fire to kill AI, use choke clouds on immolators, use
+      poison clouds on AI, etc.'
+  - GUID: f14874e4-58ae-4f03-8933-8dc070ec4ad2
+    Type: 2
+    Name: Assassin's Blade
+    Description: Your first kill on an enemy Hunter <b>MUST</b> be a melee kill.
+    Verbose: You must get your first kill using a melee weapon, however once this
+      has been achieved, you may play out the hunt as per usual
+  - GUID: 9bb5fd9a-88b6-47b9-91d8-b09a91aef015
+    Type: 2
+    Name: Martyrdom
+    Description: Your first enemy hunter kill must be from an explosion you caused
+      that also kills you.
+    Verbose: 'This can be from:
+
+      Dynamite held in your hand, dynamite thrown
+      between you and them, an explosive crossbow bolt at your feet, dark satchel
+      charge at your feet, etc.'
+  - GUID: 1bd95ca8-92d8-4d70-a4a6-ecc754d79807
+    Type: 2
+    Name: Skillful Assassin
+    Description: Every enemy hunter kill must be with a different weapon.
+    Verbose: If you find the same weapon you are using while in game, you may not
+      use that and claim it to be a different weapon. Different varients are okay.
+      E.G You may use a Caldwell Pax, and a Caldwell Pax Trueshot as 2 different
+      weapons.
+  - GUID: e64cd0be-3e06-4b10-ac2d-1be92454ad96
+    Type: 2
+    Name: Minefield
+    Description: Every time you kill an enemy hunter, you must place a trap down
+      within the next 10 seconds. If you do not successfully do this, you must be
+      downed once.
+    Verbose: You may use both brought in traps / tripwires, and beartraps you find.
